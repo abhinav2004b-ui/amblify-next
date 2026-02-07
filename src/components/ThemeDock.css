@@ -1,0 +1,196 @@
+/* CSS Variables for Themes - Restored to Explicit Parity */
+:root {
+    --amb-bg: #ffffff;
+    --amb-text: #1a1a1a;
+    --amb-accent: #000000;
+    --amb-glow: rgba(0, 0, 0, 0.1);
+    --amb-node-bg: #ffffff;
+    --amb-glass: rgba(255, 255, 255, 0.8);
+    --amb-border: rgba(0, 0, 0, 0.2);
+    --amb-core-bright: #000000;
+    --amb-border-width: 1.5px;
+}
+
+.dark {
+    --amb-bg: #000000;
+    --amb-text: #ffffff;
+    --amb-accent: #ffffff;
+    --amb-glow: rgba(255, 255, 255, 0.4);
+    --amb-node-bg: #1a1a1a;
+    --amb-glass: rgba(255, 255, 255, 0.1);
+    --amb-border: rgba(255, 255, 255, 0.4);
+    --amb-core-bright: #ffffff;
+}
+
+.cloud-mode {
+    --amb-bg: #010403;
+    --amb-text: #ffffff;
+    --amb-accent: #10b981;
+    --amb-glow: rgba(16, 185, 129, 0.6);
+    --amb-node-bg: #0a0f0c;
+    --amb-glass: rgba(16, 185, 129, 0.1);
+    --amb-border: rgba(16, 185, 129, 0.4);
+    --amb-core-bright: #10b981;
+}
+
+/* Reset styles to fight environment overrides */
+#amb-nav-root * {
+    box-sizing: border-box !important;
+}
+
+.amb-label {
+    position: absolute !important;
+    top: -24px !important;
+    font-size: 8px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s !important;
+    pointer-events: none !important;
+    white-space: nowrap !important;
+    color: var(--amb-core-bright) !important;
+    line-height: 1 !important;
+}
+
+.amb-node:hover .amb-label {
+    opacity: 1 !important;
+}
+
+.amb-nav-container {
+    position: fixed !important;
+    bottom: 40px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 100000 !important;
+    /* Extreme Top Layer */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    pointer-events: none !important;
+}
+
+.amb-nav-system {
+    position: relative !important;
+    width: 44px !important;
+    height: 44px !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Central AI Core */
+.amb-ai-core {
+    position: absolute !important;
+    width: 44px !important;
+    height: 44px !important;
+    background: var(--amb-bg) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: var(--amb-border-width) solid var(--amb-border) !important;
+    border-radius: 50% !important;
+    z-index: 100 !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    box-shadow: 0 0 20px var(--amb-glow) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+/* Bright Running Line */
+.amb-ai-core::after {
+    content: '' !important;
+    width: 65% !important;
+    height: 65% !important;
+    border-radius: 50% !important;
+    border: 1px solid rgba(128, 128, 128, 0.1) !important;
+    border-top: 3px solid var(--amb-core-bright) !important;
+    animation: amb-spin 2s linear infinite !important;
+    filter: drop-shadow(0 0 8px var(--amb-core-bright)) !important;
+}
+
+@keyframes amb-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Navigation Nodes - Centered Anchor Logic */
+.amb-node {
+    position: absolute !important;
+    width: 42px !important;
+    height: 42px !important;
+    background-color: var(--amb-node-bg) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: var(--amb-border-width) solid var(--amb-border) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: var(--amb-text) !important;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    opacity: 0 !important;
+    /* Start exactly at center */
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0) !important;
+    z-index: 50 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    cursor: pointer !important;
+    pointer-events: none !important;
+}
+
+.amb-nav-system.active .amb-node {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    pointer-events: auto !important;
+}
+
+/* Symmetrical distribution for 5 nodes */
+.amb-nav-system.active .node-0 {
+    top: calc(50% - 20px) !important;
+    left: calc(50% - 108px) !important;
+}
+
+.amb-nav-system.active .node-1 {
+    top: calc(50% - 85px) !important;
+    left: calc(50% - 70px) !important;
+}
+
+.amb-nav-system.active .node-2 {
+    top: calc(50% - 110px) !important;
+    left: 50% !important;
+}
+
+.amb-nav-system.active .node-3 {
+    top: calc(50% - 85px) !important;
+    left: calc(50% + 70px) !important;
+}
+
+.amb-nav-system.active .node-4 {
+    top: calc(50% - 20px) !important;
+    left: calc(50% + 108px) !important;
+}
+
+.amb-node:hover,
+.amb-node.active-route {
+    transform: translate(-50%, -50%) scale(1.15) !important;
+    background-color: var(--amb-accent) !important;
+    color: var(--amb-bg) !important;
+    box-shadow: 0 0 20px var(--amb-glow) !important;
+    border-color: var(--amb-accent) !important;
+    z-index: 100 !important;
+}
+
+.amb-node.active-link {
+    border-color: var(--amb-core-bright) !important;
+    box-shadow: 0 0 5px var(--amb-glow) !important;
+}
