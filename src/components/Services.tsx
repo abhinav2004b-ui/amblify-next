@@ -3,7 +3,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Link from 'next/link';
-import PuppyRunGame from './PuppyRunGame';
+import dynamic from 'next/dynamic';
+
+const PuppyRunGame = dynamic(() => import('./PuppyRunGame'), {
+    ssr: false,
+    loading: () => <div className="w-full h-full bg-black/5 animate-pulse" />
+});
 
 const services = [
     {
