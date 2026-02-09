@@ -13,9 +13,9 @@ if (API_KEY) {
     try {
         console.log("Initializing Gemini (Server Action) with Key ending in:", API_KEY.slice(-4));
         genAI = new GoogleGenerativeAI(API_KEY);
-        // User specifically requested "gemini 2"
-        model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-        console.log("Gemini 2.0 Model Initialized Successfully");
+        // Reverting to 1.5-flash to avoid Free Tier rate limits on 2.0
+        model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        console.log("Gemini 1.5 Model Initialized Successfully");
     } catch (error) {
         console.error("Failed to initialize Google AI:", error);
         model = null;
