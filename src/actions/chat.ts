@@ -4,24 +4,25 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const API_KEY = process.env.GEMINI_API_KEY;
 
-let genAI: any = null;
+// Initialize the API logic
+let genAI: GoogleGenerativeAI | null = null;
 let model: any = null;
 let initError: string | null = null;
 
 if (API_KEY) {
     try {
-        console.log("Initializing Gemini (Server) with Key ending in:", API_KEY.slice(-4));
+        console.log("Initializing Gemini (Server Action) with Key ending in:", API_KEY.slice(-4));
         genAI = new GoogleGenerativeAI(API_KEY);
-        // Using gemini-2.5-flash as it is available and matches original site parity
-        model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-        console.log("Gemini 2.5 Model Initialized Successfully on Server");
-    } catch (error: any) {
+        // User specifically requested "gemini 2"
+        model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        console.log("Gemini 2.0 Model Initialized Successfully");
+    } catch (error) {
         console.error("Failed to initialize Google AI:", error);
         model = null;
-        initError = error.message;
+        initError = (error as Error).message;
     }
 } else {
-    console.warn("GEMINI_API_KEY is missing/empty on Server");
+    console.error("GEMINI_API_KEY is missing/empty in server environment");
 }
 
 const SYSTEM_PROP = {
@@ -33,18 +34,26 @@ const SYSTEM_PROP = {
     ]
 };
 
-export async function generateResponse(history: any[], newMessage: string) {
+export async function generateResponse(history: { sender: string, text: string }[], newMessage: string) {
     if (!model) {
         if (!API_KEY) return "System Error: API Key missing on server.";
-        return `System Error: Model failed to initialize. (${initError || 'Check model ID permissions'})`;
+        return `System Error: Model failed to initialize. (${initError || 'Unknown Error'})`;
     }
 
     try {
+        // Transform the simple history format to Gemini's expected Content format
+        // Logic taken from original site: map user->user, model->model
+        // Note: original site had 'role' in history but mapped from 'sender'. 
+        // Here we map from input 'sender' to 'role' for Gemini SDK.
+        const geminiHistory = history.map(msg => ({
+            role: msg.sender === 'user' ? 'user' : 'model',
+            parts: [{ text: msg.text }],
+        }));
+
         const chat = model.startChat({
-            history: history.map(msg => ({
-                role: msg.sender === 'user' ? 'user' : 'model',
-                parts: [{ text: msg.text }],
-            })),
+            history: geminiHistory,
+            // Original site passed SYSTEM_PROP as systemInstruction
+            // Explicitly cast to any to bypass potential type mismatch with strict SDK types if necessary
             systemInstruction: SYSTEM_PROP as any,
         });
 
@@ -52,8 +61,9 @@ export async function generateResponse(history: any[], newMessage: string) {
         const response = await result.response;
         return response.text();
 
-    } catch (error: any) {
+    } catch (error) {
         console.error("AI Generation Error:", error);
-        return `Error: ${error.message}`;
+        // Match original error handling as close as possible
+        return `Error: ${(error as Error).message}`;
     }
 }

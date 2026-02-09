@@ -43,7 +43,7 @@ export default function AiAssistant() {
 
             const aiMessage = { id: Date.now() + 1, text: responseText, sender: 'ai' };
             setMessages(prev => [...prev, aiMessage]);
-        } catch (error) {
+        } catch {
             const errorMessage = { id: Date.now() + 1, text: "Critical Error: Uplink failed.", sender: 'ai' };
             setMessages(prev => [...prev, errorMessage]);
         } finally {
