@@ -1,26 +1,27 @@
+'use server';
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+const API_KEY = process.env.GEMINI_API_KEY;
 
-// Initialize the API logic
 let genAI: any = null;
 let model: any = null;
 let initError: string | null = null;
 
 if (API_KEY) {
     try {
-        console.log("Initializing Gemini with Key ending in:", API_KEY.slice(-4));
+        console.log("Initializing Gemini (Server) with Key ending in:", API_KEY.slice(-4));
         genAI = new GoogleGenerativeAI(API_KEY);
         // Using gemini-2.5-flash as it is available and matches original site parity
         model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-        console.log("Gemini 2.5 Model Initialized Successfully");
+        console.log("Gemini 2.5 Model Initialized Successfully on Server");
     } catch (error: any) {
         console.error("Failed to initialize Google AI:", error);
         model = null;
         initError = error.message;
     }
 } else {
-    console.warn("NEXT_PUBLIC_GEMINI_API_KEY is missing/empty");
+    console.warn("GEMINI_API_KEY is missing/empty on Server");
 }
 
 const SYSTEM_PROP = {
@@ -34,7 +35,7 @@ const SYSTEM_PROP = {
 
 export async function generateResponse(history: any[], newMessage: string) {
     if (!model) {
-        if (!API_KEY) return "System Error: API Key missing.";
+        if (!API_KEY) return "System Error: API Key missing on server.";
         return `System Error: Model failed to initialize. (${initError || 'Check model ID permissions'})`;
     }
 

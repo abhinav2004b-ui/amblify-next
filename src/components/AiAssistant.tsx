@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Send, X, Bot } from 'lucide-react';
-import { generateResponse } from '../utils/ai';
+import { generateResponse } from '../actions/chat';
 
 export default function AiAssistant() {
     const [isOpen, setIsOpen] = useState(false);
