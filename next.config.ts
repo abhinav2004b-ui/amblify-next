@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/cms/:path*',
-        destination: 'http://216.198.79.1/cms/:path*',
+        destination: 'http://147.93.78.205/cms/:path*',
       },
     ];
   },
