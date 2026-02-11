@@ -1,15 +1,17 @@
 "use client";
 
 import React, { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
 
 const StopTheScrollCanvas = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const container = containerRef.current;
-        if (!canvas || !container) return;
+        if (!canvas || !container || shouldReduceMotion) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
@@ -248,7 +250,7 @@ const StopTheScrollCanvas = () => {
             window.removeEventListener('resize', resize);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [shouldReduceMotion]); // Re-run if preference changes (rare but good practice)
 
     return (
         <div ref={containerRef} className="absolute inset-0 w-full h-full">

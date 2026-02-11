@@ -62,11 +62,13 @@ export default function WhyChooseMe() {
 
             {/* Sticky Container - Perspective Root */}
             <motion.div
-                className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-container transform-style-3d"
+                className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-container transform-style-3d will-change-transform" // Added will-change-transform via class or style
                 style={{
                     perspectiveOrigin: '50% 50%',
                     opacity: exitOpacity,
-                    y: exitY
+                    y: exitY,
+                    transform: 'translate3d(0,0,0)', // Force hardware acceleration
+                    willChange: 'transform, opacity' // Explicit will-change
                 }}
             >
 
@@ -139,7 +141,9 @@ function TunnelCard({ data, forwardSpeed }: { data: CardData, forwardSpeed: Moti
                 rotateY: rotateY,
                 opacity: opacity,
                 backfaceVisibility: 'hidden',
-                transformStyle: 'preserve-3d'
+                transformStyle: 'preserve-3d',
+                transform: 'translate3d(0,0,0)', // Force hardware acceleration
+                willChange: 'transform, opacity'
             }}
         >
             <div className={`relative w-full h-full p-8 rounded-2xl border-2 ${data.side === 'left' ? 'border-r-4' : 'border-l-4'} border-neutral-950/10 dark:border-white/10 bg-white/60 dark:bg-zinc-900/80 backdrop-blur-xl shadow-2xl flex flex-col justify-end overflow-hidden group hover:bg-white/80 dark:hover:bg-zinc-800 transition-all duration-300`}>

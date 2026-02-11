@@ -3,6 +3,12 @@
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useReducedMotion } from 'framer-motion';
+
+// ... (shaders omitted for brevity in thought, but I must keep them or skip them in replacement)
+
+// I will target the imports and the component body separately to avoid matching the huge shader strings.
+
 
 // -----------------------------------------------------------------------------
 // SHADERS
@@ -155,12 +161,16 @@ function MorphingParticles({ count = 80 }: { count?: number }) {
 }
 
 export default function MorphingScrollSection() {
+    const shouldReduceMotion = useReducedMotion();
+
     return (
         <section className="scroll-section relative h-[400vh] w-full bg-black hidden dark:block">
             <div className="sticky top-0 h-screen w-full overflow-hidden z-0">
-                <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-                    <MorphingParticles count={100} />
-                </Canvas>
+                {!shouldReduceMotion && (
+                    <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
+                        <MorphingParticles count={100} />
+                    </Canvas>
+                )}
             </div>
 
             <div className="absolute top-0 left-0 w-full z-10 pointer-events-none">

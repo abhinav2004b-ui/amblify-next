@@ -126,7 +126,11 @@ const MarketShift = () => {
                                             animate={{ zIndex, scale, rotate, x, y, opacity }}
                                             transition={{ type: "spring", stiffness: 200, damping: 20 }}
                                             className="absolute inset-0 rounded-2xl border border-black/10 dark:border-white/20 bg-white/90 dark:bg-[#0A0A0A] p-8 flex flex-col justify-between cursor-pointer hover:border-[#74C69D]/50 transition-colors shadow-2xl backdrop-blur-md"
-                                            style={{ transformOrigin: "bottom left" }}
+                                            style={{
+                                                transformOrigin: "bottom left",
+                                                willChange: "transform, opacity",
+                                                transform: "translate3d(0,0,0)"
+                                            }}
                                         >
                                             <div className="flex justify-between items-start relative z-10">
                                                 <span className="font-mono text-4xl font-bold text-black/20 dark:text-white/20">{card.number}</span>

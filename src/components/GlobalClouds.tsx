@@ -2,8 +2,13 @@
 
 import { Canvas } from '@react-three/fiber';
 import { Cloud, Float } from '@react-three/drei';
+import { useReducedMotion } from 'framer-motion';
 
 export default function GlobalClouds() {
+    const shouldReduceMotion = useReducedMotion();
+
+    if (shouldReduceMotion) return null;
+
     return (
         <div className="fixed inset-0 z-0 pointer-events-none opacity-0 [.cloud-mode_&]:opacity-100 [.dark_&]:opacity-40 transition-opacity duration-1000">
             <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
