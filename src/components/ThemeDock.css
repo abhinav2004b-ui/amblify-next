@@ -102,24 +102,31 @@
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
+    animation: amb-breath 3s ease-in-out infinite !important;
+    color: var(--amb-core-bright) !important;
 }
 
-/* Bright Running Line */
-.amb-ai-core::after {
-    content: '' !important;
-    width: 65% !important;
-    height: 65% !important;
-    border-radius: 50% !important;
-    border: 1px solid rgba(128, 128, 128, 0.1) !important;
-    border-top: 3px solid var(--amb-core-bright) !important;
-    animation: amb-spin 2s linear infinite !important;
-    filter: drop-shadow(0 0 8px var(--amb-core-bright)) !important;
-}
+@keyframes amb-breath {
 
-@keyframes amb-spin {
-    to {
-        transform: rotate(360deg);
+    0%,
+    100% {
+        box-shadow: 0 0 15px var(--amb-glow) !important;
+        transform: translate(-50%, -50%) scale(1) !important;
     }
+
+    50% {
+        box-shadow: 0 0 25px var(--amb-glow) !important;
+        transform: translate(-50%, -50%) scale(1.05) !important;
+    }
+}
+
+.amb-ai-core svg {
+    filter: drop-shadow(0 0 5px var(--amb-core-bright)) !important;
+    transition: transform 0.3s ease !important;
+}
+
+.amb-nav-system.active .amb-ai-core svg {
+    transform: rotate(90deg) !important;
 }
 
 /* Navigation Nodes - Centered Anchor Logic */
