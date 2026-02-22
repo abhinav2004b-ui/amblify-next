@@ -94,39 +94,56 @@
     border: var(--amb-border-width) solid var(--amb-border) !important;
     border-radius: 50% !important;
     z-index: 100 !important;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-    box-shadow: 0 0 20px var(--amb-glow) !important;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    animation: amb-breath 3s ease-in-out infinite !important;
+    animation: amb-breath 4s ease-in-out infinite !important;
     color: var(--amb-core-bright) !important;
+    overflow: hidden !important;
+}
+
+.amb-nav-system.active .amb-ai-core {
+    transform: translate(-50%, -50%) rotate(90deg) !important;
 }
 
 @keyframes amb-breath {
 
     0%,
     100% {
-        box-shadow: 0 0 15px var(--amb-glow) !important;
         transform: translate(-50%, -50%) scale(1) !important;
+        box-shadow: 0 0 12px rgba(59, 130, 246, 0.1), inset 0 0 4px rgba(59, 130, 246, 0.05) !important;
     }
 
     50% {
-        box-shadow: 0 0 25px var(--amb-glow) !important;
         transform: translate(-50%, -50%) scale(1.05) !important;
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.25), inset 0 0 8px rgba(59, 130, 246, 0.1) !important;
     }
 }
 
-.amb-ai-core svg {
-    filter: drop-shadow(0 0 5px var(--amb-core-bright)) !important;
-    transition: transform 0.3s ease !important;
+.amb-core-glow {
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: 50% !important;
+    background: #3b82f6 !important;
+    opacity: 0.05 !important;
+    filter: blur(4px) !important;
+    transition: opacity 0.3s !important;
+    pointer-events: none !important;
 }
 
-.amb-nav-system.active .amb-ai-core svg {
-    transform: rotate(90deg) !important;
+.amb-ai-core:hover .amb-core-glow {
+    opacity: 0.1 !important;
+}
+
+.amb-ai-core svg {
+    filter: drop-shadow(0 0 2px rgba(59, 130, 246, 0.3)) !important;
+    transition: transform 0.3s ease !important;
+    position: relative !important;
+    z-index: 2 !important;
 }
 
 /* Navigation Nodes - Centered Anchor Logic */
