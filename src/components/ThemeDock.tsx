@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { Home, User, Layers, Moon, Sun, Cloud, Mail, Menu, X } from 'lucide-react';
+import { Home, User, Layers, Moon, Sun, Cloud, Mail, LayoutGrid, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import './ThemeDock.css';
@@ -131,7 +131,8 @@ export default function ThemeDock() {
                     className="amb-ai-core"
                     onClick={(e) => { e.stopPropagation(); toggleOpen(); }}
                 >
-                    {isOpen ? <X size={20} /> : <Menu size={20} />}
+                    {isOpen ? <X size={20} /> : <LayoutGrid size={20} />}
+                    <div className="amb-core-glow"></div>
                 </div>
 
                 {/* Navigation Nodes */}
