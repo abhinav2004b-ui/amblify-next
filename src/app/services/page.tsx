@@ -1,10 +1,17 @@
-import DetailedServices from "@/components/DetailedServices";
-import Footer from "@/components/Footer";
+"use client";
 
-export const metadata = {
-    title: "Services | Amblify",
-    description: "Explore our comprehensive range of digital services, from SEO to Visual Synthesis.",
-};
+import dynamic from "next/dynamic";
+
+const DetailedServices = dynamic(() => import("@/components/DetailedServices"), {
+    ssr: false,
+    loading: () => <div className="h-[400vh] w-full bg-black/5 animate-pulse" />,
+});
+
+const Footer = dynamic(() => import("@/components/Footer"), {
+    ssr: false,
+    loading: () => <div className="h-[60vh] w-full bg-black/5" />,
+});
+
 
 export default function ServicesPage() {
     return (

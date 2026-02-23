@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { Home, User, Layers, Moon, Sun, Cloud, Mail, LayoutGrid, X } from 'lucide-react';
+import Home from 'lucide-react/dist/esm/icons/home';
+import User from 'lucide-react/dist/esm/icons/user';
+import Layers from 'lucide-react/dist/esm/icons/layers';
+import Moon from 'lucide-react/dist/esm/icons/moon';
+import Sun from 'lucide-react/dist/esm/icons/sun';
+import Cloud from 'lucide-react/dist/esm/icons/cloud';
+import Mail from 'lucide-react/dist/esm/icons/mail';
+import LayoutGrid from 'lucide-react/dist/esm/icons/layout-grid';
+import X from 'lucide-react/dist/esm/icons/x';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import './ThemeDock.css';

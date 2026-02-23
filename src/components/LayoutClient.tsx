@@ -2,13 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import Lenis from 'lenis';
 import BackgroundLines from './BackgroundLines';
 import GlobalClouds from './GlobalClouds';
-import ThemeDock from './ThemeDock';
-import AiAssistant from './AiAssistant';
 import TimeIndicator from './TimeIndicator';
 import Link from 'next/link';
+import GlobalLoader from './GlobalLoader';
+
+const ThemeDock = dynamic(() => import('./ThemeDock'), { ssr: false });
+const AiAssistant = dynamic(() => import('./AiAssistant'), { ssr: false });
 
 export default function LayoutClient({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
@@ -66,6 +69,7 @@ export default function LayoutClient({ children }: { children: React.ReactNode }
 
     return (
         <div className="relative w-full min-h-screen text-black dark:text-white transition-colors duration-500">
+            <GlobalLoader />
             {/* Global Background Layer */}
             <div className="fixed inset-0 pointer-events-none z-0">
                 <BackgroundLines />

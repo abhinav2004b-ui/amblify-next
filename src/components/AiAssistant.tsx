@@ -2,7 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Send, X, Bot } from 'lucide-react';
+import Sparkles from 'lucide-react/dist/esm/icons/sparkles';
+import Send from 'lucide-react/dist/esm/icons/send';
+import X from 'lucide-react/dist/esm/icons/x';
+import Bot from 'lucide-react/dist/esm/icons/bot';
 import { generateResponse } from '../actions/chat';
 
 export default function AiAssistant() {

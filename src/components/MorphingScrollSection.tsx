@@ -2,7 +2,7 @@
 
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import { Points, ShaderMaterial, AdditiveBlending } from 'three';
 import { useReducedMotion } from 'framer-motion';
 
 // ... (shaders omitted for brevity in thought, but I must keep them or skip them in replacement)
@@ -74,7 +74,7 @@ void main() {
 // -----------------------------------------------------------------------------
 
 function MorphingParticles({ count = 80 }: { count?: number }) {
-    const points = useRef<THREE.Points>(null);
+    const points = useRef<Points>(null);
 
     const data = useMemo(() => {
         const numParticles = count * count;
@@ -134,8 +134,8 @@ function MorphingParticles({ count = 80 }: { count?: number }) {
         }
 
         if (points.current && points.current.material) {
-            (points.current.material as THREE.ShaderMaterial).uniforms.uTime.value = clock.getElapsedTime();
-            (points.current.material as THREE.ShaderMaterial).uniforms.uScroll.value = scrollProgress;
+            (points.current.material as ShaderMaterial).uniforms.uTime.value = clock.getElapsedTime();
+            (points.current.material as ShaderMaterial).uniforms.uScroll.value = scrollProgress;
         }
     });
 
@@ -151,7 +151,7 @@ function MorphingParticles({ count = 80 }: { count?: number }) {
             <shaderMaterial
                 depthWrite={false}
                 transparent={true}
-                blending={THREE.AdditiveBlending}
+                blending={AdditiveBlending}
                 vertexShader={morphVertexShader}
                 fragmentShader={morphFragmentShader}
                 uniforms={uniforms}
