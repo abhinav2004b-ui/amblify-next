@@ -34,7 +34,7 @@ export default function GlobalLoader() {
                     }}
                     className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#ffffff]"
                 >
-                    <motion.h1
+                    <motion.p
                         animate={{
                             scale: [1, 1.05, 1],
                             filter: ["blur(0px)", "blur(4px)", "blur(0px)"],
@@ -47,7 +47,7 @@ export default function GlobalLoader() {
                         className="text-4xl md:text-6xl font-bold tracking-tighter text-[#1a1a1a]"
                     >
                         hallo
-                    </motion.h1>
+                    </motion.p>
                 </motion.div>
             )}
         </AnimatePresence>

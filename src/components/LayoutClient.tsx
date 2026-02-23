@@ -79,9 +79,9 @@ export default function LayoutClient({ children }: { children: React.ReactNode }
             {/* --- BRAND HEADER (Top Left) --- */}
             <header className="fixed top-8 left-8 z-50 text-white mix-blend-difference">
                 <Link href="/" className="block">
-                    <h1 className="text-sm font-bold tracking-widest lowercase">
+                    <span className="text-sm font-bold tracking-widest lowercase">
                         amblify
-                    </h1>
+                    </span>
                 </Link>
             </header>
 

@@ -29,23 +29,63 @@ const features = [
 
 export default function WhyKollam() {
     return (
-        <section className="bg-white dark:bg-black [.cloud-mode_&]:bg-transparent text-black dark:text-white py-32 px-4 md:px-12 relative overflow-hidden transition-colors duration-500">
-            {/* Background Texture */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none">
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <pattern id="grid-pattern-wk" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#grid-pattern-wk)" />
-                </svg>
-            </div>
+        <>
+            {/* DESKTOP VIEW: Complex Interactive Design */}
+            <section className="hidden md:block bg-white dark:bg-black [.cloud-mode_&]:bg-transparent text-black dark:text-white py-32 px-12 relative overflow-hidden transition-colors duration-500">
+                {/* Background Texture */}
+                <div className="absolute inset-0 opacity-10 pointer-events-none">
+                    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="grid-pattern-wk" width="40" height="40" patternUnits="userSpaceOnUse">
+                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#grid-pattern-wk)" />
+                    </svg>
+                </div>
 
-            <div className="max-w-7xl mx-auto relative z-10">
-                <InteractiveBlock />
-            </div>
-        </section>
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <InteractiveBlock />
+                </div>
+            </section>
+
+            {/* MOBILE VIEW: Simplified Vertical Stack */}
+            <section className="block md:hidden bg-white dark:bg-black [.cloud-mode_&]:bg-transparent text-black dark:text-white py-20 px-6 relative overflow-hidden transition-colors duration-500">
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <div className="mb-12">
+                        <span className="text-gray-500 dark:text-white/20 font-mono text-xs tracking-widest uppercase mb-2 block">
+                            The Agility Factor
+                        </span>
+                        <h2 className="text-3xl font-black tracking-tighter leading-tight uppercase">
+                            Why a Freelance Digital Marketer in Kollam?
+                        </h2>
+                    </div>
+
+                    <div className="flex flex-col space-y-6">
+                        {features.map((feature, idx) => (
+                            <motion.div
+                                key={feature.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-10%" }}
+                                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                className="p-6 bg-black/5 dark:bg-white/5 rounded-2xl border border-black/10 dark:border-white/10"
+                            >
+                                <span className={`text-xs font-mono uppercase tracking-widest mb-2 block ${feature.color.replace('text-', 'text-opacity-70 text-') || 'text-gray-500'}`}>
+                                    {feature.subtitle}
+                                </span>
+                                <h4 className="text-xl font-black uppercase tracking-widest mb-3">
+                                    {feature.title}
+                                </h4>
+                                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                    {feature.description}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        </>
     );
 }
 

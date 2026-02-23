@@ -58,64 +58,92 @@ export default function WhyChooseMe() {
     ];
 
     return (
-        <section ref={containerRef} className="relative w-full h-[400vh] bg-white dark:bg-black [.cloud-mode_&]:bg-transparent transition-colors duration-500">
-
-            {/* Sticky Container - Perspective Root */}
-            <motion.div
-                className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-container transform-style-3d will-change-transform" // Added will-change-transform via class or style
-                style={{
-                    perspectiveOrigin: '50% 50%',
-                    opacity: exitOpacity,
-                    y: exitY,
-                    transform: 'translate3d(0,0,0)', // Force hardware acceleration
-                    willChange: 'transform, opacity' // Explicit will-change
-                }}
-            >
-
-                {/* Background Atmosphere */}
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white dark:from-transparent dark:to-transparent opacity-80 pointer-events-none" />
-
-                {/* Floor Glow Path */}
-                <motion.div
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40vw] h-[200vh] bg-mantis-green/10 blur-[80px] origin-bottom"
-                    style={{
-                        rotateX: 90,
-                        opacity: 0.6
-                    }}
-                />
-
-                {/* Main 3D Scene - Centered perfectly between sidebars */}
-                <motion.div
-                    className="relative w-full max-w-7xl h-full flex justify-center transform-style-3d p-5"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ margin: "-20% 0px", amount: 0.2 }}
-                    transition={{ duration: 0.8 }}
-                >
-
-                    {/* Cards Corridor */}
-                    {cards.map((card) => (
-                        <TunnelCard
-                            key={card.id}
-                            data={card}
-                            forwardSpeed={forwardSpeed}
+        <>
+            {/* DESKTOP VIEW: 3D Corridor Animation */}
+            <div className="hidden md:block">
+                <section ref={containerRef} className="relative w-full h-[400vh] bg-white dark:bg-black [.cloud-mode_&]:bg-transparent transition-colors duration-500">
+                    {/* Sticky Container - Perspective Root */}
+                    <motion.div
+                        className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-container transform-style-3d will-change-transform"
+                        style={{
+                            perspectiveOrigin: '50% 50%',
+                            opacity: exitOpacity,
+                            y: exitY,
+                            transform: 'translate3d(0,0,0)',
+                            willChange: 'transform, opacity'
+                        }}
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white dark:from-transparent dark:to-transparent opacity-80 pointer-events-none" />
+                        <motion.div
+                            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40vw] h-[200vh] bg-mantis-green/10 blur-[80px] origin-bottom"
+                            style={{ rotateX: 90, opacity: 0.6 }}
                         />
-                    ))}
+                        <motion.div
+                            className="relative w-full max-w-7xl h-full flex justify-center transform-style-3d p-5"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ margin: "-20% 0px", amount: 0.2 }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            {cards.map((card) => (
+                                <TunnelCard
+                                    key={card.id}
+                                    data={card}
+                                    forwardSpeed={forwardSpeed}
+                                />
+                            ))}
+                        </motion.div>
+                        <motion.div
+                            className="absolute top-8 left-0 w-full text-center z-50 pointer-events-none mix-blend-difference"
+                            initial={{ opacity: 0, y: -20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                        >
+                            <h2 className="text-sm font-bold tracking-[0.5em] uppercase text-gray-400">Why Choose Me</h2>
+                            <h3 className="text-3xl md:text-5xl font-black text-gray-800 dark:text-gray-200">THE PASSAGE</h3>
+                        </motion.div>
+                    </motion.div>
+                </section>
+            </div>
 
-                </motion.div>
+            {/* MOBILE VIEW: Simplified Vertical Stack */}
+            <div className="block md:hidden">
+                <section className="bg-white dark:bg-black [.cloud-mode_&]:bg-transparent py-20 px-6 transition-colors duration-500">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="text-xs font-bold tracking-[0.5em] uppercase text-gray-400 mb-2">Why Choose Me</h2>
+                            <h3 className="text-3xl font-black text-black dark:text-white uppercase tracking-tight">THE PASSAGE</h3>
+                        </div>
 
-                {/* Overlay Text */}
-                <motion.div
-                    className="absolute top-8 left-0 w-full text-center z-50 pointer-events-none mix-blend-difference"
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                    <h2 className="text-sm font-bold tracking-[0.5em] uppercase text-gray-400">Why Choose Me</h2>
-                    <h3 className="text-3xl md:text-5xl font-black text-gray-800 dark:text-gray-200">THE PASSAGE</h3>
-                </motion.div>
-            </motion.div>
-        </section>
+                        <div className="flex flex-col space-y-8">
+                            {cards.map((card, idx) => (
+                                <motion.div
+                                    key={card.id}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-10%" }}
+                                    transition={{ duration: 0.6, delay: idx * 0.1 }}
+                                    className="relative p-8 rounded-2xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 backdrop-blur-lg overflow-hidden"
+                                >
+                                    <span className="absolute -top-4 -left-2 text-7xl font-black text-black/5 dark:text-white/5 pointer-events-none">
+                                        0{card.id}
+                                    </span>
+                                    <div className="relative z-10">
+                                        <h4 className="text-2xl font-bold text-black dark:text-white mb-4">
+                                            {card.title}
+                                        </h4>
+                                        <p className="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">
+                                            {card.desc}
+                                        </p>
+                                    </div>
+                                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-mantis-green opacity-50" />
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </>
     );
 }
 
