@@ -15,9 +15,11 @@ export default function Hero() {
     const [isHovered, setIsHovered] = useState(false);
 
     function handleMouseMove({ currentTarget, clientX, clientY }: any) {
-        const { left, top } = currentTarget.getBoundingClientRect();
-        mouseX.set(clientX - left);
-        mouseY.set(clientY - top);
+        requestAnimationFrame(() => {
+            const { left, top } = currentTarget.getBoundingClientRect();
+            mouseX.set(clientX - left);
+            mouseY.set(clientY - top);
+        });
     }
 
     const maskImage = useMotionTemplate`radial-gradient(circle at ${mouseX}px ${mouseY}px, transparent 0px, transparent 80px, black 120px)`;
@@ -128,8 +130,8 @@ export default function Hero() {
             </motion.div>
 
             {/* Decorative Elements */}
-            <motion.div style={{ y: useTransform(scrollY, [0, 1000], [0, 200]) }} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] border border-black/10 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none z-0" />
-            <motion.div style={{ y: useTransform(scrollY, [0, 1000], [0, 300]) }} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] border border-black/10 rounded-full animate-[spin_40s_linear_infinite_reverse] pointer-events-none z-0" />
+            <motion.div style={{ y: useTransform(scrollY, [0, 1000], [0, 200]), willChange: "transform" }} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] border border-black/10 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none z-0" />
+            <motion.div style={{ y: useTransform(scrollY, [0, 1000], [0, 300]), willChange: "transform" }} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] border border-black/10 rounded-full animate-[spin_40s_linear_infinite_reverse] pointer-events-none z-0" />
         </section >
     )
 }

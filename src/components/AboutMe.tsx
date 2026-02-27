@@ -75,7 +75,7 @@ export default function AboutMe() {
                             {/* Bottom Layer (Original Photo) - Visible through the hole */}
                             <Image
                                 src={profileImg}
-                                alt="Abhinav - Digital Marketer"
+                                alt="Abhinav Digital marketing consultant kerala"
                                 className="absolute inset-0 w-full h-full object-cover rounded-sm shadow-2xl"
                             />
 
@@ -89,7 +89,7 @@ export default function AboutMe() {
                             >
                                 <Image
                                     src={profileArt}
-                                    alt="Abhinav - Digital Art"
+                                    alt="Abhinav Digital marketing consultant kerala"
                                     className="w-full h-full object-cover rounded-sm shadow-2xl"
                                 />
                             </motion.div>

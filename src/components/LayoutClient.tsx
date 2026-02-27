@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Lenis from 'lenis';
-import BackgroundLines from './BackgroundLines';
-import GlobalClouds from './GlobalClouds';
 import TimeIndicator from './TimeIndicator';
 import Link from 'next/link';
 import GlobalLoader from './GlobalLoader';
 
 const ThemeDock = dynamic(() => import('./ThemeDock'), { ssr: false });
 const AiAssistant = dynamic(() => import('./AiAssistant'), { ssr: false });
+const BackgroundLines = dynamic(() => import('./BackgroundLines'), { ssr: false });
+const GlobalClouds = dynamic(() => import('./GlobalClouds'), { ssr: false });
 
 export default function LayoutClient({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
