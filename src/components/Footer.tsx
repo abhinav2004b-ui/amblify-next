@@ -13,7 +13,7 @@ export default function Footer() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/20 pt-8">
                 <div>
                     <h3 className="font-bold uppercase tracking-widest mb-4">Contact</h3>
-                    <p className="font-mono text-sm">amblify@workwithabhinav.com</p>
+                    <p className="font-mono text-sm">amblify.next@gmail.com</p>
                     <p className="font-mono text-sm">+1 (555) 019-2834</p>
                 </div>
                 <div>
