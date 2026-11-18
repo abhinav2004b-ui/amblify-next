@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://workwithabhinav.com'),
   title: "Best Digital Marketer in Kerala | Web Designing Consultant",
   description: "Transform your business with Abhinav, the best digital marketer in Kerala. Specializing in SEO, high-performance 3D websites, and ROI-driven marketing strategies.",
+  verification: {
+    google: "FyUW-tY8JhZJCPNpmfCI_yqMYVJ5YpdXeaaGS9j0Kng",
+  },
   openGraph: {
     title: "Best Digital Marketer in Kerala | Web Designing Consultant",
     description: "Transform your business with Abhinav, the best digital marketer in Kerala. Specializing in SEO, high-performance 3D websites, and ROI-driven marketing strategies.",
