@@ -6,7 +6,7 @@ import LayoutClient from "@/components/LayoutClient";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://workwithabhinav.com'),
+  metadataBase: new URL('https://amblify-next.vercel.app'),
   title: "Best Digital Marketer in Kerala | Web Designing Consultant",
   description: "Transform your business with Abhinav, the best digital marketer in Kerala. Specializing in SEO, high-performance 3D websites, and ROI-driven marketing strategies.",
   verification: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Best Digital Marketer in Kerala | Web Designing Consultant",
     description: "Transform your business with Abhinav, the best digital marketer in Kerala. Specializing in SEO, high-performance 3D websites, and ROI-driven marketing strategies.",
-    url: "https://workwithabhinav.com",
+    url: "https://amblify-next.vercel.app",
     siteName: "Amblify",
     images: [
       {
@@ -53,9 +53,9 @@ export default function RootLayout({
                 "@type": "ProfessionalService",
                 "name": "Amblify",
                 "alternateName": "Abhinav - Best Digital Marketer in Kerala",
-                "url": "https://workwithabhinav.com",
-                "logo": "https://workwithabhinav.com/logo.png",
-                "image": "https://workwithabhinav.com/og-image.jpg",
+                "url": "https://amblify-next.vercel.app",
+                "logo": "https://amblify-next.vercel.app/logo.png",
+                "image": "https://amblify-next.vercel.app/og-image.jpg",
                 "description": "Best Digital Marketer and Web Designing Consultant in Kerala specializing in 3D websites and SEO.",
                 "address": {
                   "@type": "PostalAddress",

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://workwithabhinav.com/sitemap.xml',
+        sitemap: 'https://amblify-next.vercel.app/sitemap.xml',
     };
 }
